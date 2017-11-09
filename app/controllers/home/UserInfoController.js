@@ -19,7 +19,7 @@ const login = async (ctx, next) => {
  * @param next
  * @returns {Promise.<void>}
  */
-const dologin = async (ctx, next) => {
+const ajaxlogin = async (ctx, next) => {
     ctx.type = 'json';
     let formData = ctx.request.body;
 
@@ -39,7 +39,6 @@ const dologin = async (ctx, next) => {
         // ctx.body = result;
         ctx.redirect('/login');
     }
-
 };
 
 /**
@@ -48,12 +47,11 @@ const dologin = async (ctx, next) => {
  * @param next
  * @returns {Promise.<void>}
  */
-const register = async (ctx,next) => {
+const register = async (ctx, next) => {
 
     await ctx.render('home/register', {
         title: 'Index'
     });
-
 };
 
 
@@ -63,55 +61,50 @@ const register = async (ctx,next) => {
  * @param next
  * @returns {Promise.<void>}
  */
-const doreg = async (ctx,next) => {
+const ajaxregister = async (ctx, next) => {
     ctx.type = 'json';
 
     let formData = ctx.request.body;
 
-    // let validateResult = userInfoRepository.validatorSignUp( formData );
+    let existOne = await userInfoRepository.findByEmailOrName(formData);
 
-    //TODO
-
-    let existOne  = await userInfoRepository.findByEmailOrName(formData);
-
-    if ( existOne  ) {
-        if ( existOne .name === formData.userName ) {
+    if (existOne) {
+        if (existOne.name === formData.userName) {
             result.message = '该用户名已存在';
             ctx.body = result;
             return
         }
-        if ( existOne .email === formData.email ) {
-            result.message = '改邮箱已存在';
+        if (existOne.email === formData.email) {
+            result.message = '该邮箱已存在';
             ctx.body = result;
             return
         }
     }
 
-
     let userResult = await userInfoRepository.create({
         email: formData.email,
         password: formData.password,
         name: formData.userName,
-        // create_time: new Date().getTime(),
+        nick: formData.nick,
+        remark: formData.remark || '',
         level: 1,
     });
 
-    console.log( userResult );
+    // console.log(userResult);
 
-    if ( userResult && userResult.insertId * 1 > 0) {
+    if (userResult && userResult.id * 1 > 0) {
         result.success = true
     } else {
         result.message = '系统错误';
     }
 
     ctx.body = result;
-
 };
 
 
 module.exports = {
     login,
-    dologin,
+    ajaxlogin,
     register,
-    doreg
+    ajaxregister
 };

@@ -9,7 +9,9 @@ let authMiddleware = function () {
     let except = [
         '/api',
         '/register',
+        '/ajaxRegister',
         '/login',
+        '/ajaxLogin',
         '/logout'
     ];
 
@@ -17,7 +19,7 @@ let authMiddleware = function () {
         if (!url || typeof url !== 'string') return false;
 
         for (let str of except) {
-            if (url.toLowerCase().startsWith(str)) return true;
+            if (url.startsWith(str)) return true;
         }
 
         return false;
@@ -28,7 +30,7 @@ let authMiddleware = function () {
         try {
             if (!isInExcept(ctx.request.url)) {
                 let session = ctx.session;
-                if (!session.isLogin) {
+                if (session && !session.isLogin) {
                     ctx.redirect('/login');
                 }
             }

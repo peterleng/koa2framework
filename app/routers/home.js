@@ -6,9 +6,9 @@ const userinfoController = require('./../controllers/home/UserInfoController');
 const routers = router
     .get('/', indexController.index)
     .get('login', userinfoController.login)
-    .post('dologin', userinfoController.dologin)
+    .post('ajaxLogin', userinfoController.ajaxlogin)
     .get('register', userinfoController.register)
-    .post('doreg', userinfoController.doreg);
+    .post('ajaxRegister', userinfoController.ajaxregister);
 
 
 module.exports = routers;

@@ -1,6 +1,8 @@
 const config = {
-
+    
     port: 3001,
+
+    timezone: 'Asia/Shanghai',
 
     database: {
         host: '10.0.4.8',

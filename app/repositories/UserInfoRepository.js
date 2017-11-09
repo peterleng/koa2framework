@@ -1,6 +1,7 @@
 // const validator = require('validator');
 const userModel = require('../models/UserInfo');
-
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 const UserInfoRepository = {
 
