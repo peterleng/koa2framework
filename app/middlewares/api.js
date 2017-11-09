@@ -1,5 +1,9 @@
 const result = require('./../utils/jsonResponse');
 
+/**
+ * 接口验证
+ * @returns {function(*, *)}
+ */
 let apiMiddleware = function () {
     return async (ctx, next) => {
         ctx.type = 'json';
@@ -10,20 +14,24 @@ let apiMiddleware = function () {
 
                 //TODO sign validate
                 //if false throw new Error('签名错误');
-            }
 
-            await next();
+                await next();
+
+                if (ctx.response.body) {
+                    result.success = true;
+                    result.code = 200;
+                    result.data = ctx.response.body;
+                }
+                ctx.response.body = result;
+
+            }else{
+                await next();
+            }
         } catch (error) {
             result.message = error.message;
             result.code = error.code;
             ctx.response.body = result;
         }
-        if (ctx.response.body) {
-            result.success = true;
-            result.code = 200;
-            result.data = ctx.response.body;
-        }
-        ctx.response.body = result;
     }
 };
 
