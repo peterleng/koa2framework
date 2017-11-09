@@ -2,8 +2,9 @@
   "name": "koa2framework",
   "version": "1.0.0",
   "description": "koa2基本框架，可拿起来直接搭建项目使用",
-  "main": "app/app.js",
+  "main": "app.js",
   "scripts": {
+    "start": "node ./app/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -25,6 +26,8 @@
     "koa-send": "^4.1.1",
     "koa-static": "^4.0.1",
     "koa-views": "^6.1.1",
-    "mysql": "^2.15.0"
+    "mysql": "^2.15.0",
+    "mysql2": "^1.4.2",
+    "sequelize": "^4.22.5"
   }
 }

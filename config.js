@@ -7,12 +7,12 @@ const config = {
         username: 'root',
         password: 'CenturyQWERT',
         database: 'test',
-        port: '33066'
+        port: 33066
     },
 
     session: {
         domain: 'localhost',
-        lifetime: 2 * 60 * 1000,
+        lifetime: 120 * 60 * 1000,
         cookie: '_koa2session',
         path: '/',
         httpOnly: true,
@@ -23,7 +23,7 @@ const config = {
         host: '10.0.4.49',
         password: '123456',
         port: 6379,
-        database: 1,
+        db: 1,
         // persistent:1
     }
 };

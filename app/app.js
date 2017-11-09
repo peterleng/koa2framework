@@ -7,10 +7,10 @@ const koaStatic = require('koa-static');
 const bodyParser = require('koa-bodyparser');
 const koaLogger = require('koa-logger');
 const session = require('koa-generic-session');
-const MysqlStore = require('koa-mysql-session');
+// const MysqlStore = require('koa-mysql-session');
 const RedisStore = require('koa-redis');
 
-const routers = require('./routers/index');
+const routers = require('./../lib/router');
 
 const app = new Koa();
 
