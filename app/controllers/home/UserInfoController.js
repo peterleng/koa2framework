@@ -36,7 +36,8 @@ const dologin = async (ctx, next) => {
 
         ctx.redirect('/');
     } else {
-        ctx.body = result;
+        // ctx.body = result;
+        ctx.redirect('/login');
     }
 
 };

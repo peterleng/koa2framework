@@ -1,22 +1,61 @@
 
 <%- include('common/header', {'title': '注册页'} ) %>
 
-<form action="/doreg" method="post">
+<div class="wrapper wrapper-content animated">
+    <div class="row">
+        <div class="col-lg-5 table-bordered">
+            <form class="form-horizontal" action="/doreg" method="post">
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">用户名</label>
+                    <div class="col-lg-4">
+                        <input type="text" name="userName" class="form-control" placeholder="用户名">
+                    </div>
+                </div>
 
-    <label>用户名</label>
-    <input name="userName" type="text" value="" placeholder="用户名">
-    <label>邮箱</label>
-    <input name="email" type="text" value="" placeholder="邮箱">
-    <label>昵称</label>
-    <input name="nick" type="text" value="" placeholder="昵称">
-    <label>密码</label>
-    <input name="password" type="password" value="" placeholder="密码">
-    <label>确认密码</label>
-    <input name="confirmPassword" type="password" value="" placeholder="密码">
-    <label>详细信息</label>
-    <textarea name="remark"></textarea>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">邮箱</label>
+                    <div class="col-lg-4">
+                        <input type="email" name="email" class="form-control" placeholder="邮箱">
+                    </div>
+                </div>
 
-    <button type="submit">注册</button>
-</form>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">昵称</label>
+                    <div class="col-lg-4">
+                        <input type="text" name="nick" class="form-control" placeholder="昵称">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">密码</label>
+                    <div class="col-lg-4">
+                        <input type="password" name="password" class="form-control" placeholder="密码">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">确认密码</label>
+                    <div class="col-lg-4">
+                        <input type="password" name="confirmPassword" class="form-control" placeholder="确认密码">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">详细信息</label>
+                    <div class="col-lg-4">
+                        <textarea class="form-control" name="remark"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-4">
+                        <button type="submit" class="btn btn-default">注册</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <%- include('common/footer') %>

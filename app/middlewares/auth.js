@@ -8,6 +8,7 @@ let authMiddleware = function () {
 
     let except = [
         '/api',
+        '/register',
         '/login',
         '/logout'
     ];
