@@ -1,0 +1,29 @@
+{
+  "name": "koa2framework",
+  "version": "1.0.0",
+  "description": "koa2基本框架，可拿起来直接搭建项目使用",
+  "main": "app/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "koa",
+    "nodejs"
+  ],
+  "author": "lengyufeng",
+  "license": "MIT",
+  "dependencies": {
+    "busboy": "^0.2.14",
+    "ejs": "^2.5.7",
+    "koa": "^2.4.1",
+    "koa-bodyparser": "^4.2.0",
+    "koa-logger": "^3.1.0",
+    "koa-mysql-session": "0.0.2",
+    "koa-router": "^7.2.1",
+    "koa-send": "^4.1.1",
+    "koa-session-minimal": "^3.0.4",
+    "koa-static": "^4.0.1",
+    "koa-views": "^6.1.1",
+    "mysql": "^2.15.0"
+  }
+}
