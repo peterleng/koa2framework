@@ -6,7 +6,9 @@ const userinfoController = require('./../controllers/home/UserInfoController');
 const routers = router
     .get('/', indexController.index)
     .get('login', userinfoController.login)
-    .post('dologin', userinfoController.dologin);
+    .post('dologin', userinfoController.dologin)
+    .get('register', userinfoController.register)
+    .post('doreg', userinfoController.doreg);
 
 
 module.exports = routers;

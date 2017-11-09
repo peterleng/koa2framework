@@ -7,6 +7,7 @@ const koaStatic = require('koa-static');
 const bodyParser = require('koa-bodyparser');
 const koaLogger = require('koa-logger');
 const session = require('koa-generic-session');
+const jsonp = require('koa-jsonp');
 // const MysqlStore = require('koa-mysql-session');
 const RedisStore = require('koa-redis');
 
@@ -43,6 +44,9 @@ app.use(session({
 
 // 配置控制台日志中间件
 app.use(koaLogger());
+
+//配置jsonp输出
+app.use(jsonp());
 
 // 配置ctx.body解析中间件
 app.use(bodyParser());
