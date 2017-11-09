@@ -1,5 +1,7 @@
 const index = async (ctx,next) => {
-    ctx.response.body = 'admin index page';
+    await ctx.render('admin/index',{
+        title: 'Admin'
+    })
 };
 
 
