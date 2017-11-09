@@ -15,6 +15,19 @@ const routers = require('./../lib/router');
 
 const app = new Koa();
 
+// 配置控制台日志中间件
+app.use(koaLogger());
+
+//配置jsonp输出
+app.use(jsonp());
+
+const apiMiddleware = require('./middlewares/api');
+app.use(apiMiddleware());
+
+
+// 配置ctx.body解析中间件
+app.use(bodyParser());
+
 // 配置session中间件
 app.use(session({
     key: config.session.cookie,
@@ -41,15 +54,6 @@ app.use(session({
     }
 }));
 
-
-// 配置控制台日志中间件
-app.use(koaLogger());
-
-//配置jsonp输出
-app.use(jsonp());
-
-// 配置ctx.body解析中间件
-app.use(bodyParser());
 
 // 配置静态资源加载中间件
 app.use(koaStatic(

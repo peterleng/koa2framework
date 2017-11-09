@@ -67,7 +67,7 @@ const doreg = async (ctx,next) => {
 
     let formData = ctx.request.body;
 
-    let validateResult = userInfoRepository.validatorSignUp( formData );
+    // let validateResult = userInfoRepository.validatorSignUp( formData );
 
     //TODO
 
