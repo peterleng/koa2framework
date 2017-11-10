@@ -1,7 +1,5 @@
 const userInfoRepository = require('./../../repositories/UserInfoRepository');
 const LoginError = require('./../../utils/errors/LoginError');
-const json = require('./../../utils/json');
-
 
 /**
  * 登录页
@@ -44,9 +42,9 @@ exports.ajaxlogin = async (ctx, next) => {
             throw new LoginError('登录失败.');
         }
 
-        ctx.response.body = json.success(null, '登录成功');
+        ctx.response.body = ctx.jsonSuccess(null, '登录成功');
     } catch (err) {
-        ctx.response.body = json.error(err.message, err.code);
+        ctx.response.body = ctx.jsonError(err.message, err.code);
     }
 };
 
@@ -108,9 +106,9 @@ exports.ajaxregister = async (ctx, next) => {
             nick: userResult.nick
         };
 
-        ctx.response.body = json.success(null, '注册成功');
+        ctx.response.body = ctx.jsonSuccess(null, '注册成功');
     } catch (err) {
-        ctx.response.body = json.error(err.message, err.code);
+        ctx.response.body = ctx.jsonError(err.message, err.code);
     }
 };
 
@@ -126,8 +124,8 @@ exports.logout = async (ctx, next) => {
         ctx.session = null;
         // delete ctx.session.user;
 
-        ctx.response.body = json.success(null, '退出成功');
+        ctx.response.body = ctx.jsonSuccess(null, '退出成功');
     } catch (err) {
-        ctx.response.body = json.error(err.message, err.code);
+        ctx.response.body = ctx.jsonError(err.message, err.code);
     }
 };

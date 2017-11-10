@@ -67,6 +67,8 @@
             $.post('/ajaxRegister', params, function (result) {
                 if (result && result.success === true) {
                     location.href = '/';
+                }else {
+                    alert(result.message);
                 }
             })
         });

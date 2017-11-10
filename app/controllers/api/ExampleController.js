@@ -4,6 +4,6 @@
  * @param next
  * @returns {Promise.<void>}
  */
-exports.index = async (ctx,next) => {
-    ctx.response.body = 'api index page';
+exports.index = async (ctx, next) => {
+    ctx.response.body = ctx.jsonSuccess('api index page');
 };

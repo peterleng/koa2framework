@@ -10,6 +10,7 @@ const session = require('koa-generic-session');
 // const MysqlStore = require('koa-mysql-session');
 const RedisStore = require('koa-redis');
 // const jsonp = require('koa-jsonp');
+const json = require('./../app/utils/json');
 const isAjax = require('koa-isajax');
 
 const routers = require('./router');
@@ -25,7 +26,10 @@ app.use(koaLogger());
 // app.use(jsonp());
 
 //配置ajax判断
-// app.use(isAjax());
+app.use(isAjax());
+
+//配置json格式返回函数
+app.use(json());
 
 // 配置ctx.body解析中间件
 app.use(bodyParser());

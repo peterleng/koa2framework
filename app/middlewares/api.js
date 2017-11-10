@@ -1,5 +1,3 @@
-const json = require('./../utils/json');
-
 /**
  * 接口验证
  * @returns {function(*, *)}
@@ -12,19 +10,12 @@ let apiMiddleware = function () {
 
                 //TODO sign validate
                 //if false throw new Error('签名错误');
-
-                await next();
-
-                if (ctx.response.body) {
-                    ctx.response.body = json.success(ctx.response.body);
-                }
-
-            } else {
-                await next();
             }
         } catch (err) {
-            ctx.response.body = json.error(err.message, err.code);
+            ctx.response.body = ctx.jsonError(err.message, err.code);
         }
+
+        await next();
     }
 };
 
