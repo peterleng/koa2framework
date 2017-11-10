@@ -33,8 +33,13 @@ exports.ajaxlogin = async (ctx, next) => {
         if (userResult.id) {
             let session = ctx.session;
             session.isLogin = true;
-            session.userName = userResult.name;
-            session.userId = userResult.id;
+
+            session.user = ctx.state = {
+                id: userResult.id,
+                email: userResult.email,
+                name: userResult.name,
+                nick: userResult.nick
+            };
         } else {
             throw new LoginError('登录失败.');
         }
@@ -93,7 +98,35 @@ exports.ajaxregister = async (ctx, next) => {
             throw new LoginError('注册失败.');
         }
 
+        let session = ctx.session;
+        session.isLogin = true;
+
+        session.user = ctx.state = {
+            id: userResult.id,
+            email: userResult.email,
+            name: userResult.name,
+            nick: userResult.nick
+        };
+
         ctx.response.body = json.success(null, '注册成功');
+    } catch (err) {
+        ctx.response.body = json.error(err.message, err.code);
+    }
+};
+
+/**
+ * 退出
+ * @param ctx
+ * @param next
+ * @returns {Promise.<void>}
+ */
+exports.logout = async (ctx, next) => {
+    try {
+
+        ctx.session = null;
+        // delete ctx.session.user;
+
+        ctx.response.body = json.success(null, '退出成功');
     } catch (err) {
         ctx.response.body = json.error(err.message, err.code);
     }

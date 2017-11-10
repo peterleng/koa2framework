@@ -7,9 +7,6 @@ const json = require('./../utils/json');
 let apiMiddleware = function () {
 
     return async (ctx, next) => {
-        ctx.type = 'json';
-        ctx.status = 200;
-
         try {
             if (ctx.request.url.startsWith('/api')) {
 

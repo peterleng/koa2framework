@@ -8,7 +8,8 @@ const routers = router
     .get('home.login', 'login', userinfoController.login)
     .post('home.ajaxLogin', 'ajaxLogin', userinfoController.ajaxlogin)
     .get('home.register', 'register', userinfoController.register)
-    .post('home.ajaxRegister', 'ajaxRegister', userinfoController.ajaxregister);
+    .post('home.ajaxRegister', 'ajaxRegister', userinfoController.ajaxregister)
+    .get('home.logout', 'logout', userinfoController.logout);
 
 
 module.exports = routers;

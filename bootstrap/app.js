@@ -25,7 +25,7 @@ app.use(koaLogger());
 // app.use(jsonp());
 
 //配置ajax判断
-app.use(isAjax());
+// app.use(isAjax());
 
 // 配置ctx.body解析中间件
 app.use(bodyParser());
@@ -35,15 +35,11 @@ app.use(bodyParser());
 const apiMiddleware = require('./../app/middlewares/api');
 app.use(apiMiddleware());
 
+
 // 配置静态资源加载中间件
 app.use(koaStatic(
     path.join(__dirname, './../static')
 ));
-
-//配置模板渲染引擎中间件
-app.use(views(path.join(__dirname, './../app/views'), {
-    extension: 'ejs'
-}));
 
 // 配置session中间件
 app.use(session({
@@ -72,9 +68,18 @@ app.use(session({
     }
 }));
 
+//配置模板渲染引擎中间件
+app.use(views(path.join(__dirname, './../app/views'), {
+    extension: 'ejs'
+})).use(async (ctx,next) => {
+    ctx.state.user = ctx.session.user;
+    await next();
+});
+
 //登录中间件验证
 const authMiddleware = require('./../app/middlewares/auth');
 app.use(authMiddleware());
+
 
 //初始化路由中间件
 app.use(routers.routes()).use(routers.allowedMethods());

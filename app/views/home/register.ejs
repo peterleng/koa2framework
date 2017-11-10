@@ -3,7 +3,7 @@
 
 <div class="wrapper marginAuto">
         <div class="col-lg-8 table-bordered">
-            <form class="form-horizontal" action="/ajaxRegister" method="post">
+            <form class="form-horizontal register-form" action="/ajaxRegister" method="post">
                 <div class="form-group">
                     <label class="col-lg-2 control-label">用户名</label>
                     <div class="col-lg-4">
@@ -49,7 +49,7 @@
                 <div class="form-group">
                     <div class="col-lg-2"></div>
                     <div class="col-lg-4">
-                        <button type="submit" class="btn btn-default">注册</button>
+                        <button type="button" class="btn btn-default btn-submit">注册</button>
                     </div>
                 </div>
             </form>
@@ -57,3 +57,19 @@
 </div>
 
 <%- include('common/footer') %>
+
+<script>
+    $(document).ready(function () {
+
+        $('.btn-submit').on('click', function () {
+            var form = $('.register-form'), params = form.serialize();
+
+            $.post('/ajaxRegister', params, function (result) {
+                if (result && result.success === true) {
+                    location.href = '/';
+                }
+            })
+        });
+
+    });
+</script>

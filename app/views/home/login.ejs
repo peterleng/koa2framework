@@ -1,30 +1,46 @@
 <%- include('common/header', {'title': '登录页'} ) %>
 
 <div class="wrapper marginAuto">
-        <div class="col-lg-8 table-bordered">
-            <form class="form-horizontal" action="/ajaxLogin" method="post">
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">用户名</label>
-                    <div class="col-lg-4">
-                        <input type="text" name="userName" class="form-control" placeholder="用户名">
-                    </div>
+    <div class="col-lg-8 table-bordered">
+        <form class="form-horizontal login-form" action="/ajaxLogin" method="post">
+            <div class="form-group">
+                <label class="col-lg-2 control-label">用户名</label>
+                <div class="col-lg-4">
+                    <input type="text" name="userName" class="form-control" placeholder="用户名">
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">密码</label>
-                    <div class="col-lg-4">
-                        <input type="password" name="password" class="form-control" placeholder="用户名">
-                    </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">密码</label>
+                <div class="col-lg-4">
+                    <input type="password" name="password" class="form-control" placeholder="密码">
                 </div>
-                <div class="form-group">
-                    <div class="col-lg-2"></div>
-                    <div class="col-lg-4">
-                        <button type="submit" class="btn btn-default">登录</button>
-                    </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-4">
+                    <button type="button" class="btn btn-default btn-submit">登录</button>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
+    </div>
 </div>
 
 
 <%- include('common/footer') %>
+
+<script>
+    $(document).ready(function () {
+
+        $('.btn-submit').on('click', function () {
+            var form = $('.login-form'), params = form.serialize();
+
+            $.post('/ajaxLogin', params, function (result) {
+                if (result && result.success === true) {
+                    location.href = '/';
+                }
+            })
+        });
+
+    });
+</script>

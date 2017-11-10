@@ -31,7 +31,7 @@ let authMiddleware = function () {
                 let session = ctx.session, isLogin = session && session.isLogin === true;
                 if (!isLogin) {
                     if (ctx.state.xhr) {
-                        ctx.response.body = json.error('请先登录.', 420);
+                        ctx.response.body = json.error('请先登录.', 423);
                     } else {
                         ctx.redirect('/login');
                     }

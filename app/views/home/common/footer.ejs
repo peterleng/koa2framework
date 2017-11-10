@@ -1,5 +1,16 @@
-
-
 </div>
+
+<script>
+
+    $(document).ready(function () {
+        $('.btn-logout').on('click', function () {
+            $.get('/logout', function () {
+                location.href = '/login';
+            });
+        });
+    });
+
+</script>
+
 </body>
 </html>

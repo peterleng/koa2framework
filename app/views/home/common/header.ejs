@@ -31,10 +31,13 @@
             </ul>
 
             <div class="nav navbar-nav navbar-right">
-                <span>欢迎您，用户名</span>
-                <a href="#">退出</a>
+                <% if(user){ %>
+                <span>您好，<%= user.nick %></span>
+                <a href="javascript:;" class="btn-logout">退出</a>
+                <% }else{ %>
                 <a href="/login">登录</a>
                 <a href="/register">注册</a>
+                <% } %>
             </div>
         </div>
 
