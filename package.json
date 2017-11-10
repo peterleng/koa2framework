@@ -4,7 +4,7 @@
   "description": "koa2基本框架，可拿起来直接搭建项目使用",
   "main": "app.js",
   "scripts": {
-    "start": "node ./app/app.js",
+    "start": "node ./bootstrap/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

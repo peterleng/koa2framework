@@ -22,8 +22,6 @@ exports.login = async (ctx, next) => {
  * @returns {Promise.<void>}
  */
 exports.ajaxlogin = async (ctx, next) => {
-    ctx.type = 'json';
-
     try {
         let formData = ctx.request.body;
 
@@ -69,7 +67,6 @@ exports.register = async (ctx, next) => {
  * @returns {Promise.<void>}
  */
 exports.ajaxregister = async (ctx, next) => {
-    ctx.type = 'json';
     try {
         let formData = ctx.request.body;
         let existOne = await userInfoRepository.findByEmailOrName(formData);

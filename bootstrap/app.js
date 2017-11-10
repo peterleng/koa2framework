@@ -12,7 +12,7 @@ const RedisStore = require('koa-redis');
 // const jsonp = require('koa-jsonp');
 const isAjax = require('koa-isajax');
 
-const routers = require('./../lib/router');
+const routers = require('./router');
 
 const app = new Koa();
 app.keys = ['keys', config.keys];//cookies signed
@@ -32,7 +32,7 @@ app.use(bodyParser());
 
 
 //api中间件验证
-const apiMiddleware = require('./middlewares/api');
+const apiMiddleware = require('./../app/middlewares/api');
 app.use(apiMiddleware());
 
 // 配置静态资源加载中间件
@@ -41,7 +41,7 @@ app.use(koaStatic(
 ));
 
 //配置模板渲染引擎中间件
-app.use(views(path.join(__dirname, '/views'), {
+app.use(views(path.join(__dirname, './../app/views'), {
     extension: 'ejs'
 }));
 
@@ -73,7 +73,7 @@ app.use(session({
 }));
 
 //登录中间件验证
-const authMiddleware = require('./middlewares/auth');
+const authMiddleware = require('./../app/middlewares/auth');
 app.use(authMiddleware());
 
 //初始化路由中间件
