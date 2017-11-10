@@ -56,6 +56,10 @@ let Userinfo = sequelize.define('userinfo', {
             },
         }
     },
+    icon: {
+        type: Sequelize.STRING(150),
+        allowNull: false,
+    },
     remark: {
         type: Sequelize.TEXT,
         allowNull: false,

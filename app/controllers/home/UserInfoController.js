@@ -1,5 +1,6 @@
 const userInfoRepository = require('./../../repositories/UserInfoRepository');
 const LoginError = require('./../../utils/errors/LoginError');
+const uploadFile = require('./../../utils/upload');
 
 /**
  * 登录页
@@ -8,8 +9,8 @@ const LoginError = require('./../../utils/errors/LoginError');
  * @returns {Promise.<void>}
  */
 exports.login = async (ctx, next) => {
-    await ctx.render('home/login', {
-        title: 'Index'
+    await ctx.render('home/user/login', {
+        title: '登录页'
     });
 };
 
@@ -57,8 +58,8 @@ exports.ajaxlogin = async (ctx, next) => {
  */
 exports.register = async (ctx, next) => {
 
-    await ctx.render('home/register', {
-        title: 'Index'
+    await ctx.render('home/user/register', {
+        title: '注册页'
     });
 };
 
@@ -113,6 +114,40 @@ exports.ajaxregister = async (ctx, next) => {
 };
 
 /**
+ * 上传图像
+ * @param ctx
+ * @param next
+ * @returns {Promise.<void>}
+ */
+exports.upload_icon = async (ctx, next) => {
+
+    await ctx.render('home/user/upload_icon', {
+        title: '上传头像'
+    });
+};
+
+/**
+ * 处理上传头像
+ * @param ctx
+ * @param next
+ * @returns {Promise.<void>}
+ */
+exports.ajaxuserupload = async (ctx, next) => {
+    try {
+        let formData = ctx.request.body;
+
+        let result = await uploadFile(ctx, 'icon');
+
+
+
+        ctx.response.body = ctx.jsonSuccess(null, '登录成功');
+    } catch (err) {
+        ctx.response.body = ctx.jsonError(err.message, err.code);
+    }
+};
+
+
+/**
  * 退出
  * @param ctx
  * @param next
@@ -120,9 +155,7 @@ exports.ajaxregister = async (ctx, next) => {
  */
 exports.logout = async (ctx, next) => {
     try {
-
         ctx.session = null;
-        // delete ctx.session.user;
 
         ctx.response.body = ctx.jsonSuccess(null, '退出成功');
     } catch (err) {
