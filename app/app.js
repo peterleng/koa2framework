@@ -7,22 +7,25 @@ const koaStatic = require('koa-static');
 const bodyParser = require('koa-bodyparser');
 const koaLogger = require('koa-logger');
 const session = require('koa-generic-session');
-const jsonp = require('koa-jsonp');
 // const MysqlStore = require('koa-mysql-session');
 const RedisStore = require('koa-redis');
+// const jsonp = require('koa-jsonp');
+const isAjax = require('koa-isajax');
 
 const routers = require('./../lib/router');
 
 const app = new Koa();
-
+app.keys = ['keys', config.keys];//cookies signed
 
 // 配置控制台日志中间件
 app.use(koaLogger());
 
 
 //配置jsonp输出
-app.use(jsonp());
+// app.use(jsonp());
 
+//配置ajax判断
+app.use(isAjax());
 
 // 配置ctx.body解析中间件
 app.use(bodyParser());
@@ -64,7 +67,8 @@ app.use(session({
         maxAge: config.session.lifetime,
         httpOnly: config.session.httpOnly,
         secure: config.session.secure,
-        overwrite: false
+        overwrite: false,
+        signed: true
     }
 }));
 

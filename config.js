@@ -1,6 +1,10 @@
 const config = {
-    
+
+    env: 'development',//production
+
     port: 3001,
+
+    keys: 'koa2framework_key',
 
     timezone: 'Asia/Shanghai',
 
@@ -14,7 +18,7 @@ const config = {
 
     session: {
         domain: 'localhost',
-        lifetime: 120 * 60 * 1000,
+        lifetime: 2 * 60 * 60 * 1000,
         cookie: '_koa2session',
         path: '/',
         httpOnly: true,

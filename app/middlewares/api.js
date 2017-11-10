@@ -1,10 +1,11 @@
-const result = require('./../utils/jsonResponse');
+const json = require('./../utils/json');
 
 /**
  * 接口验证
  * @returns {function(*, *)}
  */
 let apiMiddleware = function () {
+
     return async (ctx, next) => {
         ctx.type = 'json';
         ctx.status = 200;
@@ -18,22 +19,16 @@ let apiMiddleware = function () {
                 await next();
 
                 if (ctx.response.body) {
-                    result.success = true;
-                    result.code = 200;
-                    result.data = ctx.response.body;
+                    ctx.response.body = json.success(ctx.response.body);
                 }
-                ctx.response.body = result;
 
-            }else{
+            } else {
                 await next();
             }
-        } catch (error) {
-            result.message = error.message;
-            result.code = error.code;
-            ctx.response.body = result;
+        } catch (err) {
+            ctx.response.body = json.error(err.message, err.code);
         }
     }
 };
-
 
 module.exports = apiMiddleware;

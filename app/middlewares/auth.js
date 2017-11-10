@@ -1,4 +1,4 @@
-const result = require('./../utils/jsonResponse');
+const json = require('./../utils/json');
 
 /**
  * 登录验证
@@ -25,13 +25,16 @@ let authMiddleware = function () {
         return false;
     }
 
-
     return async (ctx, next) => {
         try {
             if (!isInExcept(ctx.request.url)) {
-                let session = ctx.session;
-                if (session && !session.isLogin) {
-                    ctx.redirect('/login');
+                let session = ctx.session, isLogin = session && session.isLogin === true;
+                if (!isLogin) {
+                    if (ctx.state.xhr) {
+                        ctx.response.body = json.error('请先登录.', 420);
+                    } else {
+                        ctx.redirect('/login');
+                    }
                 }
             }
         } catch (error) {
@@ -41,6 +44,5 @@ let authMiddleware = function () {
         await next();
     }
 };
-
 
 module.exports = authMiddleware;
