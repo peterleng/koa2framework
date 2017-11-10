@@ -1,6 +1,5 @@
 const userInfoRepository = require('./../../repositories/UserInfoRepository');
 const LoginError = require('./../../utils/errors/LoginError');
-const uploadFile = require('./../../utils/upload');
 
 /**
  * 登录页
@@ -132,13 +131,11 @@ exports.upload_icon = async (ctx, next) => {
  * @param next
  * @returns {Promise.<void>}
  */
-exports.ajaxuserupload = async (ctx, next) => {
+exports.ajaxuserIcon = async (ctx, next) => {
     try {
         let formData = ctx.request.body;
 
-        let result = await uploadFile(ctx, 'icon');
-
-
+        //TODO 保存头像
 
         ctx.response.body = ctx.jsonSuccess(null, '登录成功');
     } catch (err) {

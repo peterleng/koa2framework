@@ -6,6 +6,8 @@ module.exports = () => {
     return async (ctx, next) => {
 
         ctx.jsonSuccess = (data, msg) => {
+            ctx.type = 'json';
+            ctx.status = '200';
             return {success: true, message: msg || '', data: data || null, code: 200};
         };
 
@@ -17,6 +19,8 @@ module.exports = () => {
                     msg = arr[1] || '系统错误';
                 }
             }
+            ctx.type = 'json';
+            ctx.status = '200';
 
             return {success: false, message: msg, data: null, code: code || 400};
         };

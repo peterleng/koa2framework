@@ -22,6 +22,7 @@
     "koa-isajax": "^1.0.5",
     "koa-jsonp": "^2.0.2",
     "koa-logger": "^3.1.0",
+    "koa-multer": "^1.0.2",
     "koa-mysql-session": "0.0.2",
     "koa-redis": "^3.1.1",
     "koa-router": "^7.2.1",
