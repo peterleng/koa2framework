@@ -9,6 +9,8 @@ const routers = router
     .post('home.ajaxLogin', 'ajaxLogin', userinfoController.ajaxlogin)
     .get('home.register', 'register', userinfoController.register)
     .post('home.ajaxRegister', 'ajaxRegister', userinfoController.ajaxregister)
+    .get('home.profile', 'profile', userinfoController.profile)
+    .post('home.ajaxProfile', 'ajaxProfile', userinfoController.ajaxProfile)
     .get('home.logout', 'logout', userinfoController.logout);
 
 

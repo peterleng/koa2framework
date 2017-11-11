@@ -118,10 +118,14 @@ exports.ajaxregister = async (ctx, next) => {
  * @param next
  * @returns {Promise.<void>}
  */
-exports.upload_icon = async (ctx, next) => {
+exports.profile = async (ctx, next) => {
+    let username = ctx.session.user.name;
+
+    const userResult = await userInfoRepository.findByName(username);
 
     await ctx.render('home/user/upload_icon', {
-        title: '上传头像'
+        title: '上传头像',
+        userInfo: userResult
     });
 };
 
@@ -131,11 +135,12 @@ exports.upload_icon = async (ctx, next) => {
  * @param next
  * @returns {Promise.<void>}
  */
-exports.ajaxuserIcon = async (ctx, next) => {
+exports.ajaxProfile = async (ctx, next) => {
     try {
         let formData = ctx.request.body;
 
         //TODO 保存头像
+
 
         ctx.response.body = ctx.jsonSuccess(null, '登录成功');
     } catch (err) {

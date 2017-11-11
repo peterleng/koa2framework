@@ -33,6 +33,7 @@ let authMiddleware = function () {
                     } else {
                         ctx.redirect('/login');
                     }
+                    return;
                 }
             }
         } catch (error) {

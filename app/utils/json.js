@@ -7,7 +7,7 @@ module.exports = () => {
 
         ctx.jsonSuccess = (data, msg) => {
             ctx.type = 'json';
-            ctx.status = '200';
+            ctx.status = 200;
             return {success: true, message: msg || '', data: data || null, code: 200};
         };
 
@@ -20,7 +20,7 @@ module.exports = () => {
                 }
             }
             ctx.type = 'json';
-            ctx.status = '200';
+            ctx.status = 200;
 
             return {success: false, message: msg, data: null, code: code || 400};
         };

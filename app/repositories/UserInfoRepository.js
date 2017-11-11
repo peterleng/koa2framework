@@ -14,6 +14,28 @@ const UserInfoRepository = {
     },
 
     /**
+     * 更新用户信息
+     * @param id
+     * @param attrs
+     * @return {Promise.<void>}
+     */
+    async update(id, attrs) {
+        let instance = userModel.findOne({where: {id: id}});
+        return instance.update(attrs);
+    },
+
+    /**
+     * 删除用户
+     * @param id
+     * @return {Promise.<void>}
+     */
+    async remove(id) {
+        let instance = userModel.findOne({where: {id: id}});
+        return instance.destroy({force: true});
+    },
+
+
+    /**
      * 查找存在用户信息
      * @param  {object} formData 查找的表单数据
      * @return {object|null}      查找结果
@@ -26,6 +48,7 @@ const UserInfoRepository = {
         });
         return resultData;
     },
+
 
     /**
      * 登录业务操作
@@ -49,16 +72,13 @@ const UserInfoRepository = {
      * @return {object|null}     查找结果
      */
     async findByName(userName) {
+        let resultData = await userModel.findOne({
+            where: {
+                'name': userName
+            }
+        });
 
-        let resultData = await userModel.findOne({where: {'name': userName}}) || {};
-        let userInfo = {
-            id: resultData.id,
-            email: resultData.email,
-            userName: resultData.name,
-            remark: resultData.remark,
-            createTime: resultData.create_time
-        };
-        return userInfo;
+        return resultData;
     }
 };
 

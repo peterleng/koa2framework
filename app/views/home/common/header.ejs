@@ -33,6 +33,7 @@
             <div class="nav navbar-nav navbar-right">
                 <% if(user){ %>
                 <span>您好，<%= user.nick %></span>
+                <a href="/profile">个人中心</a>
                 <a href="javascript:;" class="btn-logout">退出</a>
                 <% }else{ %>
                 <a href="/login">登录</a>
