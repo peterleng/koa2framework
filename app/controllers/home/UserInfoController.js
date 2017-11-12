@@ -138,11 +138,11 @@ exports.profile = async (ctx, next) => {
 exports.ajaxProfile = async (ctx, next) => {
     try {
         let formData = ctx.request.body;
+        let id = formData.id;
 
-        //TODO 保存头像
+        const updateResult = await userInfoRepository.update(id, {icon: formData.icon});
 
-
-        ctx.response.body = ctx.jsonSuccess(null, '登录成功');
+        ctx.response.body = ctx.jsonSuccess(null, '修改成功');
     } catch (err) {
         ctx.response.body = ctx.jsonError(err.message, err.code);
     }

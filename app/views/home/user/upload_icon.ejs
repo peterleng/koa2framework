@@ -34,8 +34,12 @@
             <div class="form-group">
                 <label class="col-lg-2 control-label">头像</label>
                 <div class="col-lg-4">
+                    <% if(userInfo.icon){ %>
+                    <img src="<%= userInfo.icon %>" class="user-icon">
+                    <% }else{ %>
                     <img src="" class="user-icon">
-                    <input type="hidden" name="icon" value="">
+                    <% } %>
+                    <input type="hidden" name="icon" class="icon_value" value="">
                     <input type="file" class="form-control input-icon" name="icon_img">
                 </div>
             </div>
@@ -46,6 +50,7 @@
                     <button type="button" class="btn btn-default btn-submit">保存</button>
                 </div>
             </div>
+            <input type="hidden" name="id" value="<%= userInfo.id %>">
         </form>
     </div>
 </div>
@@ -58,6 +63,7 @@
 
         $('.btn-submit').on('click', function () {
             var form = $('.login-form'), params = form.serialize();
+            console.log(params);
 
             $.post('/ajaxProfile', params, function (result) {
                 if (result && result.success === true) {
@@ -87,7 +93,8 @@
                 success : function (data) {
                     console.log(data);
                     if(data.success === true){
-
+                        $('.user-icon').attr('src',data.data.url);
+                        $('.icon_value').val(data.data.value);
                     }else {
                         alert(data.message);
                     }

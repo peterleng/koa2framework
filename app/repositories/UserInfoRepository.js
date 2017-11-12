@@ -15,13 +15,14 @@ const UserInfoRepository = {
 
     /**
      * 更新用户信息
-     * @param id
-     * @param attrs
+     * @param {integer} id
+     * @param {object} attrs
      * @return {Promise.<void>}
      */
     async update(id, attrs) {
-        let instance = userModel.findOne({where: {id: id}});
-        return instance.update(attrs);
+        return userModel.findById(id).then(user => {
+            return user.update(attrs);
+        });
     },
 
     /**
