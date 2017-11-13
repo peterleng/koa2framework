@@ -6,8 +6,9 @@ const config = {
 
     port: 3000,
     ssl_port: 3001,
+    proxy: false,
 
-    res_host: '/',
+    res_host: '/', //例如： http://res.host.com
 
     cookie: {
         secret: 'koa2framework_secret',

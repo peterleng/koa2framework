@@ -17,9 +17,12 @@ const routers = require('./router');
 
 const app = new Koa();
 app.keys = [config.cookie.secret, config.cookie.turtle];
+app.proxy = config.proxy;
 
-// 配置控制台日志中间件
-app.use(koaLogger());
+if(config.env !== 'production'){
+    // 配置控制台日志中间件
+    app.use(koaLogger());
+}
 
 //配置ajax判断
 app.use(isAjax());
@@ -95,3 +98,4 @@ http.createServer(app.callback()).listen(config.ssl_port);
 
 
 console.log(`the server is start at port ${config.port}`);
+console.log(`the server is start at ssl_port ${config.ssl_port}`);
