@@ -16,8 +16,10 @@ const isAjax = require('koa-isajax');
 const routers = require('./router');
 
 const app = new Koa();
+app.env = config.env;
 app.keys = [config.cookie.secret, config.cookie.turtle];
 app.proxy = config.proxy;
+// app.context.config = config;
 
 if(config.env !== 'production'){
     // 配置控制台日志中间件
@@ -92,7 +94,6 @@ app.use(authMiddleware());
 app.use(routers.routes()).use(routers.allowedMethods());
 
 // app.listen(config.port);
-
 http.createServer(app.callback()).listen(config.port);
 http.createServer(app.callback()).listen(config.ssl_port);
 

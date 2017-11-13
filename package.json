@@ -14,7 +14,6 @@
   "author": "lengyufeng",
   "license": "MIT",
   "dependencies": {
-    "busboy": "^0.2.14",
     "ejs": "^2.5.7",
     "koa": "^2.4.1",
     "koa-bodyparser": "^4.2.0",
