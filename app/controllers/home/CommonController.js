@@ -24,7 +24,7 @@ module.exports.upfile = async (ctx, next) => {
     try {
 
         let date = new Date();
-        let dirpath = '/upload/' + date.getFullYear() + '/' + (parseInt(date.getMonth()) + 1) + '/' + date.getDate();
+        let dirpath = 'upload/' + date.getFullYear() + '/' + (parseInt(date.getMonth()) + 1) + '/' + date.getDate();
         let dirfullpath = path.join(__dirname, './../../../static/' + dirpath);
         if (!fs.existsSync(dirfullpath)) mkdirsSync(dirfullpath);
 

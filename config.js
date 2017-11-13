@@ -2,11 +2,13 @@ const config = {
 
     env: 'development',//production
 
+    timezone: 'Asia/Shanghai',
+
     port: 3001,
 
     keys: 'koa2framework_key',
 
-    timezone: 'Asia/Shanghai',
+    res_host: '/',
 
     database: {
         host: '10.0.4.8',

@@ -35,7 +35,7 @@
                 <label class="col-lg-2 control-label">头像</label>
                 <div class="col-lg-4">
                     <% if(userInfo.icon){ %>
-                    <img src="<%= userInfo.icon %>" class="user-icon">
+                    <img src="<%= res_host + userInfo.icon %>" class="user-icon">
                     <% }else{ %>
                     <img src="" class="user-icon">
                     <% } %>
@@ -68,7 +68,7 @@
             $.post('/ajaxProfile', params, function (result) {
                 if (result && result.success === true) {
                     location.href = '/';
-                }else {
+                } else {
                     alert(result.message);
                 }
             })
@@ -87,19 +87,19 @@
                 cache: false,
                 processData: false, //不处理数据
                 contentType: false, //不修改MIME类型
-                dataType:'json',//返回json
-                beforeSend:function () {
+                dataType: 'json',//返回json
+                beforeSend: function () {
                 },
-                success : function (data) {
+                success: function (data) {
                     console.log(data);
-                    if(data.success === true){
-                        $('.user-icon').attr('src',data.data.url);
+                    if (data.success === true) {
+                        $('.user-icon').attr('src', data.data.url);
                         $('.icon_value').val(data.data.value);
-                    }else {
+                    } else {
                         alert(data.message);
                     }
                 },
-                error:function (XMLHttpRequest, textStatus, errorThrown) {
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
                     alert(textStatus);
                 }
             });
@@ -107,7 +107,7 @@
         }
 
 
-        $('input[type=file]').on('change',function () {
+        $('input[type=file]').on('change', function () {
 
             uoloadFile(this.files[0]);
 

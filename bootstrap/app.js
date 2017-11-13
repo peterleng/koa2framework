@@ -75,7 +75,11 @@ app.use(session({
 //配置模板渲染引擎中间件
 app.use(views(path.join(__dirname, './../app/views'), {
     extension: 'ejs'
-})).use(async (ctx,next) => {
+}));
+
+//view共享参数
+app.use(async (ctx, next) => {
+    ctx.state.res_host = config.res_host;
     ctx.state.user = ctx.session.user;
     await next();
 });
