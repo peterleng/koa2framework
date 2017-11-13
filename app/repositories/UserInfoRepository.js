@@ -31,8 +31,8 @@ const UserInfoRepository = {
      * @return {Promise.<void>}
      */
     async remove(id) {
-        let instance = userModel.findOne({where: {id: id}});
-        return instance.destroy({force: true});
+        // let instance = userModel.findOne({where: {id: id}});
+        return userModel.destroy({where: {id: id}, force: true});
     },
 
 

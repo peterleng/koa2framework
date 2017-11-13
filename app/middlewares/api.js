@@ -9,7 +9,8 @@ let apiMiddleware = function () {
             if (ctx.request.url.startsWith('/api')) {
 
                 //TODO sign validate
-                //if false throw new Error('签名错误');
+                // if false ctx.throw('签名错误.');
+                return;
             }
         } catch (err) {
             ctx.response.body = ctx.jsonError(err.message, err.code);
