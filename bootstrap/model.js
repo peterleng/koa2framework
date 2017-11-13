@@ -5,7 +5,7 @@ const sequelize = new Sequelize(config.database.database, config.database.userna
     host: config.database.host,
     port: config.database.port,
     dialect: 'mysql',
-    timezone:config.timezone,
+    timezone: config.timezone,
     pool: {
         max: 5,
         min: 0,

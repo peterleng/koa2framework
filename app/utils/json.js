@@ -22,7 +22,7 @@ module.exports = () => {
             ctx.type = 'json';
             ctx.status = 200;
 
-            return {success: false, message: msg, data: null, code: code || 400};
+            return {success: false, message: msg || '系统错误', data: null, code: code || 400};
         };
 
         await next();
