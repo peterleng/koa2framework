@@ -4,8 +4,9 @@
   "description": "koa2基本框架，可拿起来直接搭建项目使用",
   "main": "app.js",
   "scripts": {
-    "start": "node --use_strict ./bootstrap/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "set NODE_ENV=production && node --use_strict ./bootstrap/app.js",
+    "start_dev": "set NODE_ENV=development && node ./node_modules/.bin/nodemon ./bootstrap/app.js",
+    "test": "set NODE_ENV=test && echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "koa",
@@ -31,5 +32,8 @@
     "mysql": "^2.15.0",
     "mysql2": "^1.4.2",
     "sequelize": "^4.22.5"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
   }
 }

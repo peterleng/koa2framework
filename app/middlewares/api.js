@@ -10,10 +10,10 @@ let apiMiddleware = function () {
 
                 //TODO sign validate
                 // if false ctx.throw('签名错误.');
-                return;
             }
         } catch (err) {
             ctx.response.body = ctx.jsonError(err.message, err.code);
+            return;
         }
 
         await next();

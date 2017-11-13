@@ -6,9 +6,9 @@ const config = {
 
     port: 3000,
     ssl_port: 3001,
-    proxy: false,
+    proxy: true,
 
-    res_host: '/', //例如： http://res.host.com
+    res_host: '/', //例如： http://res.nodejs.dev/
 
     cookie: {
         secret: 'koa2framework_secret',
@@ -16,7 +16,7 @@ const config = {
     },
 
     session: {
-        domain: 'localhost',
+        domain: 'localhost', //.nodejs.dev
         lifetime: 2 * 60 * 60 * 1000,
         cookie: '_koa2session',
         path: '/',
