@@ -4,18 +4,14 @@ const config = {
 
     timezone: 'Asia/Shanghai',
 
-    port: 3001,
-
-    keys: 'koa2framework_key',
+    port: 3000,
+    ssl_port: 3001,
 
     res_host: '/',
 
-    database: {
-        host: '10.0.4.8',
-        username: 'root',
-        password: 'CenturyQWERT',
-        database: 'test',
-        port: 33066
+    cookie: {
+        secret: 'koa2framework_secret',
+        turtle: 'koa2framework_turtle'
     },
 
     session: {
@@ -25,6 +21,14 @@ const config = {
         path: '/',
         httpOnly: true,
         secure: false
+    },
+
+    database: {
+        host: '10.0.4.8',
+        username: 'root',
+        password: 'CenturyQWERT',
+        database: 'test',
+        port: 33066
     },
 
     redis: {

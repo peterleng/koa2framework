@@ -1,6 +1,7 @@
 const config = require('./../config');
 
 const path = require('path');
+const http = require('http');
 const Koa = require('koa');
 const views = require('koa-views');
 const koaStatic = require('koa-static');
@@ -9,30 +10,25 @@ const koaLogger = require('koa-logger');
 const session = require('koa-generic-session');
 // const MysqlStore = require('koa-mysql-session');
 const RedisStore = require('koa-redis');
-// const jsonp = require('koa-jsonp');
 const json = require('./../app/utils/json');
 const isAjax = require('koa-isajax');
 
 const routers = require('./router');
 
 const app = new Koa();
-app.keys = ['keys', config.keys];//cookies signed
+app.keys = [config.cookie.secret, config.cookie.turtle];
 
 // 配置控制台日志中间件
 app.use(koaLogger());
 
-
-//配置jsonp输出
-// app.use(jsonp());
-
 //配置ajax判断
 app.use(isAjax());
 
-//配置json格式返回函数
-app.use(json());
-
 // 配置ctx.body解析中间件
 app.use(bodyParser());
+
+//配置json格式返回函数
+app.use(json());
 
 
 //api中间件验证
@@ -92,6 +88,10 @@ app.use(authMiddleware());
 //初始化路由中间件
 app.use(routers.routes()).use(routers.allowedMethods());
 
-app.listen(config.port);
+// app.listen(config.port);
+
+http.createServer(app.callback()).listen(config.port);
+http.createServer(app.callback()).listen(config.ssl_port);
+
 
 console.log(`the server is start at port ${config.port}`);
