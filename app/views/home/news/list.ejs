@@ -1,0 +1,62 @@
+<%- include('../common/header', {'title': '登录页','nav':'news'} ) %>
+
+<div class="wrapper marginAuto">
+    <div class="row" style="margin-left: 10px;">
+        <a class="btn btn-default" href="/news/add" target="_blank">添加新闻</a>
+    </div>
+    <div class="col-lg-10">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>标题</th>
+                <th>作者</th>
+                <th>创建时间</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <% for (let item of newslist) {%>
+            <tr>
+                <td><%= item.title%></td>
+                <td><%= item.author%></td>
+                <td><%= moment(item.create_time).format('YYYY-MM-DD HH:mm:ss') %></td>
+                <td>
+                    <% if(item.status == 1){ %>
+                    显示
+                    <%}else{%>
+                    隐藏
+                    <% } %>
+                </td>
+                <td>
+                    <a href="/news/edit/<%= item.id%>" class="btn btn-edit">修改</a>
+                    <a href="javascript:;" class="btn btn-del" data-id="<%= item.id%>">删除</a>
+                </td>
+            </tr>
+            <% } %>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+<%- include('../common/footer') %>
+<script>
+    $(document).ready(function () {
+
+        $('.btn-del').on('click', function () {
+            var id = $(this).data('id');
+
+            $.post('/news/remove', {id:id}, function (result) {
+                if (result && result.success === true) {
+                    location.href = '/news';
+                }else {
+                    alert(result.message);
+                }
+            })
+        });
+
+    });
+</script>

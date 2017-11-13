@@ -1,0 +1,61 @@
+<%- include('../common/header', {'title': '添加新闻','nav':'news'} ) %>
+
+<div class="wrapper marginAuto">
+    <div class="col-lg-8">
+        <form class="form-horizontal login-form" action="/news/save" method="post">
+            <div class="form-group">
+                <label class="col-lg-2 control-label">标题</label>
+                <div class="col-lg-8">
+                    <input type="text" name="title" class="form-control" placeholder="标题">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-2 control-label">作者</label>
+                <div class="col-lg-3">
+                    <input type="text" name="author" class="form-control" placeholder="作者" value="匿名">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-2 control-label">简介</label>
+                <div class="col-lg-6">
+                    <textarea class="form-control" name="summary" cols="20" rows="4"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-2 control-label">内容详情</label>
+                <div class="col-lg-8">
+                    <textarea class="form-control" name="content" cols="20" rows="10"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-2 control-label">状态</label>
+                <div class="col-lg-8">
+                    <label>
+                        <input type="radio" name="status" value="0">
+                        隐藏
+                    </label>
+
+                    <label>
+                        <input type="radio" name="status" value="1">
+                        显示
+                    </label>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-4">
+                    <button type="submit" class="btn btn-default btn-submit">保存</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<%- include('../common/footer') %>

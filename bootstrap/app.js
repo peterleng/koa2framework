@@ -81,6 +81,7 @@ app.use(views(path.join(__dirname, './../app/views'), {
 //view共享参数
 app.use(async (ctx, next) => {
     ctx.state.res_host = config.res_host;
+    ctx.state.moment = require('moment');
     ctx.state.user = ctx.session.user;
     await next();
 });
