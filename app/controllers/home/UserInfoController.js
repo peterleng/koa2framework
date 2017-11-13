@@ -1,5 +1,4 @@
 const userInfoRepository = require('./../../repositories/UserInfoRepository');
-// const LoginError = require('./../../utils/errors/LoginError');
 
 /**
  * 登录页
@@ -26,7 +25,6 @@ exports.ajaxlogin = async (ctx, next) => {
         let userResult = await userInfoRepository.findByNameAndPass(formData);
         if (!userResult) {
             ctx.throw('用户名或登录密码错误.');
-            // throw new LoginError('用户名或登录密码错误.');
         }
 
         if (userResult.id) {
@@ -41,7 +39,6 @@ exports.ajaxlogin = async (ctx, next) => {
             };
         } else {
             ctx.throw('登录失败.');
-            // throw new LoginError('登录失败.');
         }
 
         ctx.response.body = ctx.jsonSuccess(null, '登录成功');
@@ -79,11 +76,9 @@ exports.ajaxregister = async (ctx, next) => {
         if (existOne) {
             if (existOne.name === formData.userName) {
                 ctx.throw('该用户名已存在.');
-                // throw new LoginError('该用户名已存在.');
             }
             if (existOne.email === formData.email) {
                 ctx.throw('该邮箱已存在.');
-                // throw new LoginError('该邮箱已存在.');
             }
         }
 
@@ -98,7 +93,6 @@ exports.ajaxregister = async (ctx, next) => {
 
         if (!userResult || !userResult.id) {
             ctx.throw('注册失败.');
-            // throw new LoginError('注册失败.');
         }
 
         let session = ctx.session;
