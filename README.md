@@ -1,14 +1,27 @@
 # koa2framework
 > 一个可以快速搭建koa2基础项目的框架
 
-1, 直接运行如下命令安装依赖包：
+1, 安装Linux Binaries(64)版本node.js
 ```
+xz -d node-(version).tar.xz
+tar xvf node-(version).tar
+
+ln -s /mypath/node-(version)/bin/node /usr/local/bin/node
+ln -s /mypath/node-(version)/bin/npm /usr/local/bin/npm
+
+```
+
+2, 直接运行如下命令安装依赖包：
+```
+cd project_dir
+
 npm install
+
 ```
 
-2, 修改config中的参数；
+3, 修改config中的参数；
 
-3, 配置nginx代理：
+4, 配置nginx反向代理子域名：
 ```
 server
 {
