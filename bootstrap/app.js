@@ -12,16 +12,16 @@ const session = require('koa-generic-session');
 const RedisStore = require('koa-redis');
 const json = require('./../app/utils/json');
 const isAjax = require('koa-isajax');
+const webSockify = require('koa-websocket');
 
-const routers = require('./router');
-
-const app = new Koa();
+// const app = new Koa();
+const app = webSockify(new Koa());
 app.env = config.env;
 app.keys = [config.cookie.secret, config.cookie.turtle];
 app.proxy = config.proxy;
 // app.context.config = config;
 
-if(config.env !== 'production'){
+if (config.env !== 'production') {
     // 配置控制台日志中间件
     app.use(koaLogger());
 }
@@ -90,14 +90,22 @@ app.use(async (ctx, next) => {
 const authMiddleware = require('./../app/middlewares/auth');
 app.use(authMiddleware());
 
-
 //初始化路由中间件
+const routers = require('./router');
 app.use(routers.routes()).use(routers.allowedMethods());
 
-// app.listen(config.port);
-http.createServer(app.callback()).listen(config.port);
-http.createServer(app.callback()).listen(config.ssl_port);
+//初始化WebSocket路由中间件
+const wsRouters = require('./../app/routers/ws');
+app.ws.use(wsRouters.routes()).use(wsRouters.allowedMethods());
 
+
+let server = http.createServer(app.callback());
+server.listen(config.port);
+// server.listen(config.ssl_port);
+
+app.ws.listen({
+    server: server,
+});
 
 console.log(`the server is start at port ${config.port}`);
-console.log(`the server is start at ssl_port ${config.ssl_port}`);
+// console.log(`the server is start at ssl_port ${config.ssl_port}`);

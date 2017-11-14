@@ -35,7 +35,8 @@ exports.ajaxlogin = async (ctx, next) => {
                 id: userResult.id,
                 email: userResult.email,
                 name: userResult.name,
-                nick: userResult.nick
+                nick: userResult.nick,
+                icon: userResult.icon,
             };
         } else {
             ctx.throw('登录失败.');

@@ -80,6 +80,16 @@ const UserInfoRepository = {
         });
 
         return resultData;
+    },
+
+    /**
+     * 根据用户id查找用户业务操作
+     * @param  {integer} id 用户id
+     * @return {object|null}     查找结果
+     */
+    async findById(id) {
+        let resultData = await userModel.findById(id);
+        return resultData;
     }
 };
 

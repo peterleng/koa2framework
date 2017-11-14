@@ -3,6 +3,7 @@ const router = require('koa-router')();
 const indexController = require('./../controllers/home/IndexController');
 const userinfoController = require('./../controllers/home/UserInfoController');
 const newsController = require('./../controllers/home/NewsController');
+const roomController = require('../controllers/home/ChatRoomController');
 
 const routers = router
     .get('home.index', '/', indexController.index)
@@ -18,6 +19,7 @@ const routers = router
     .get('home.news.edit', 'news/edit/:id', newsController.edit)
     .post('home.news.save', 'news/save', newsController.save)
     .post('home.news.del', 'news/remove', newsController.remove)
+    .get('home.chat.room', 'chatroom', roomController.roomIndex)
     .get('home.logout', 'logout', userinfoController.logout);
 
 

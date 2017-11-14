@@ -1,0 +1,144 @@
+<%- include('../common/header', {'title': '聊天室','nav':'chat'} ) %>
+
+<style>
+    .chat_frame {
+        height: 440px;
+    }
+
+    .user_list {
+        height: 500px;
+        margin-left: 15px;
+    }
+
+    .user_list .row {
+        margin: 5px 0;
+    }
+
+    .chat_text {
+        font-size: 20px;
+    }
+
+    .chat_frame .row {
+        margin: 13px 0 20px 5px;
+    }
+
+    .chat_input {
+        height: auto;
+        margin-top: 5px;
+    }
+
+    .chat_input .ta_input {
+        padding: 0 0;
+    }
+
+    .textarea {
+        width: 100%;
+        height: 50px;
+    }
+</style>
+
+<div class="wrapper marginAuto">
+    <div class="col-lg-5">
+        <div class="table-bordered chat_frame">
+            <!--<div class="row text-center">
+                <span class="text-info">某某加入了聊天室</span>
+            </div>
+            <div class="row">
+                <div class="text-left ">张三说：</div>
+                <div class="text-left chat_text">我来了</div>
+            </div>-->
+        </div>
+        <div class="chat_input">
+            <div class="col-lg-10 ta_input">
+                <textarea class="textarea"></textarea>
+            </div>
+            <div class="col-lg-2">
+                <button class="btn btn-default btn-submit">发送</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 table-bordered user_list">
+        <!--<div class="row" data-id="1">
+            <span class="text-info" >张三</span>
+        </div>
+        <div class="row" data-id="2">
+            <span class="text-info" >李四</span>
+        </div>-->
+    </div>
+</div>
+
+
+<%- include('../common/footer') %>
+<script>
+    var uid = <%= user.id %>;
+    function buildUserList(list) {
+        for (var i = 0; i < list.length; i++) {
+            addToUserList(list[i]);
+        }
+    }
+
+    function addToUserList(user) {
+        $('.user_list').append('<div class="row" data-id="' + user.id + '"><span class="text-info" >' + user.nick + '</span></div>');
+    }
+
+    function removeFromUserList(user) {
+        $('.user_list').find(".row[data-id='" + user.id + "']").remove();
+    }
+
+    function addMessage(msg) {
+        if (msg.type === 'join' || msg.type === 'leave') {
+            var action = msg.type === 'join' ? '进入聊天室' : '离开了';
+
+            $('.chat_frame').append('<div class="row text-center"><span class="text-info">' + msg.user.nick + action + '</span></div>');
+        } else {
+            var isme = uid === msg.user.id, name = isme ? '我' : msg.user.nick;
+
+            $('.chat_frame').append('<div class="row"><div class="text-left '+(isme ? 'text-primary' : '')+'">' + name + '说：</div><div class="text-left chat_text">' + msg.data + '</div></div>');
+        }
+    }
+
+    $(document).ready(function () {
+
+        var ws = new WebSocket('ws://localhost:3000/wsauth/' + uid);
+
+        ws.onmessage = function (event) {
+            var data = event.data;
+            var msg = JSON.parse(data);
+            console.log(msg);
+            if (msg.type === 'list') {
+                buildUserList(msg.data);
+            } else if (msg.type === 'join') {
+                if (uid !== msg.user.id) {
+                    addToUserList(msg.user);
+                }
+                addMessage(msg);
+            } else if (msg.type === 'leave') {
+                removeFromUserList(msg.user);
+                addMessage(msg);
+            } else if (msg.type === 'chat') {
+                addMessage(msg);
+            }
+        }
+
+        ws.onclose = function (evt) {
+            console.log('[closed] ' + evt.code);
+//            var input = $('#form-chat').find('input[type=text]');
+//            input.attr('placeholder', 'WebSocket disconnected.');
+//            input.attr('disabled', 'disabled');
+//            $('#form-chat').find('button').attr('disabled', 'disabled');
+        };
+
+        ws.onerror = function (code, msg) {
+            console.log('[ERROR] ' + code + ': ' + msg);
+        };
+
+        $('.btn-submit').on('click', function () {
+            var textarea = $('.ta_input textarea'), text = textarea.val().trim();
+            console.log('[chat] ' + text);
+            if (text) {
+                textarea.val('');
+                ws.send(text);
+            }
+        });
+    });
+</script>
