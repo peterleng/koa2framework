@@ -12,14 +12,13 @@ const session = require('koa-generic-session');
 const RedisStore = require('koa-redis');
 const json = require('./../app/utils/json');
 const isAjax = require('koa-isajax');
-const webSockify = require('koa-websocket');
+const webSockify = require('koa-websocket');//默认关闭socket
 
 // const app = new Koa();
-const app = webSockify(new Koa());
+const app = webSockify(new Koa()); //默认关闭socket
 app.env = config.env;
 app.keys = [config.cookie.secret, config.cookie.turtle];
 app.proxy = config.proxy;
-// app.context.config = config;
 
 if (config.env !== 'production') {
     // 配置控制台日志中间件
@@ -41,7 +40,7 @@ const apiMiddleware = require('./../app/middlewares/api');
 app.use(apiMiddleware());
 
 
-// 配置静态资源加载中间件
+// 配置静态资源加载中间件  通过nginx处理静态文件时无需此配置
 app.use(koaStatic(
     path.join(__dirname, './../static')
 ));
@@ -80,7 +79,7 @@ app.use(views(path.join(__dirname, './../app/views'), {
 
 //view共享参数
 app.use(async (ctx, next) => {
-    ctx.state.res_host = config.res_host;
+    ctx.state.config = config;
     ctx.state.moment = require('moment');
     ctx.state.user = ctx.session.user;
     await next();
@@ -94,6 +93,7 @@ app.use(authMiddleware());
 const routers = require('./router');
 app.use(routers.routes()).use(routers.allowedMethods());
 
+//默认关闭socket
 //初始化WebSocket路由中间件
 const wsRouters = require('./../app/routers/ws');
 app.ws.use(wsRouters.routes()).use(wsRouters.allowedMethods());
@@ -103,9 +103,11 @@ let server = http.createServer(app.callback());
 server.listen(config.port);
 // server.listen(config.ssl_port);
 
+//默认关闭socket
 app.ws.listen({
     server: server,
 });
+
 
 console.log(`the server is start at port ${config.port}`);
 // console.log(`the server is start at ssl_port ${config.ssl_port}`);
