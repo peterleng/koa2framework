@@ -25,9 +25,6 @@ if (config.env !== 'production') {
     app.use(koaLogger());
 }
 
-//配置ajax判断
-app.use(isAjax());
-
 // 配置ctx.body解析中间件
 app.use(bodyParser());
 
@@ -39,6 +36,8 @@ app.use(json());
 const apiMiddleware = require('./../app/middlewares/api');
 app.use(apiMiddleware());
 
+//配置ajax判断
+app.use(isAjax());
 
 // 配置静态资源加载中间件  通过nginx处理静态文件时无需此配置
 app.use(koaStatic(
@@ -77,6 +76,10 @@ app.use(views(path.join(__dirname, './../app/views'), {
     extension: 'ejs'
 }));
 
+//登录中间件验证
+const authMiddleware = require('./../app/middlewares/auth');
+app.use(authMiddleware());
+
 //view共享参数
 app.use(async (ctx, next) => {
     ctx.state.config = config;
@@ -84,10 +87,6 @@ app.use(async (ctx, next) => {
     ctx.state.user = ctx.session.user;
     await next();
 });
-
-//登录中间件验证
-const authMiddleware = require('./../app/middlewares/auth');
-app.use(authMiddleware());
 
 //初始化路由中间件
 const routers = require('./router');
