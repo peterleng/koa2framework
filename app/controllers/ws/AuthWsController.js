@@ -1,7 +1,7 @@
 const url = require('url');
 const userInfoRepository = require('./../../repositories/UserInfoRepository');
 
-var messageIndex = 0;
+let messageIndex = 0;
 
 function createMessage(type, user, data) {
     messageIndex++;
