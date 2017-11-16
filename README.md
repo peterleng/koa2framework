@@ -23,7 +23,8 @@ npm install
 ### 五, 使用pm2方式运行nodejs项目，提高系统吞吐率
     
 1. 配置pm2环境
-    > 这时不可使用软连方式启动npm和node命令，需要配置path环境
+
+    这时**不可使用软连方式运行npm和node**命令，需要配置path环境
       
     ```
     vi /etc/profile
@@ -36,55 +37,27 @@ npm install
     npm install pm2 -g
     ```
 3. pm2配置文件
-    > 生成pm2配置文件，可使用js、json、yml三种文件格式
+    
+    生成pm2配置文件，可使用js、json、yml三种文件格式
     ```
     cd project_dir
     pm2 ecosystem
     ```
-    以上命令会自动生成一个 ecosystem.config.js 文件，修改为自己项目的配置后：
-    ```js
-    module.exports = {
-        /**
-         * pm2启动配置，文件名可自定义，可使用json，js，yml文件
-         */
-        apps: [
-            // First application
-            {
-                name: 'koa2framework',
-                script: './bootstrap/app.js',
-                instance: 'max',
-                watch: true,
-                exec_mode: 'cluster',
-                env: {
-                    NODE_ENV: 'development',
-                    COMMON_VARIABLE: 'true'
-                },
-                env_production: {
-                    NODE_ENV: 'production'
-                }
-            },
-            /*
-            // Second application
-            {
-                name: 'WEB',
-                script: 'web.js'
-            }
-            */
-        ]
-    };
-    ```
+    以上命令会自动生成一个 ecosystem.config.js 文件，修改为自己项目的配置
 4. 最后启动项目
 ```
 pm2 start ecosystem.config.js
 'OR'
 pm2 start ecosystem.config.js --env production
 ```
-启动成功，便可以看到如下的信息
+启动成功，便可以看到类似下面的信息
 ```
-┌───────────────┬────┬─────────┬──────┬────────┬─────────┬────────┬─────┬───────────┬──────┬──────────┐
-│ App name      │ id │ mode    │ pid  │ status │ restart │ uptime │ cpu │ mem       │ user │ watching │
-├───────────────┼────┼─────────┼──────┼────────┼─────────┼────────┼─────┼───────────┼──────┼──────────┤
-│ koa2framework │ 0  │ cluster │ 9313 │ online │ 1       │ 0s     │ 90% │ 17.3 MB   │ root │ enabled  │
-└───────────────┴────┴─────────┴──────┴────────┴─────────┴────────┴─────┴───────────┴──────┴──────────┘
+┌───────────────────┬────┬─────────┬──────┬────────┬─────────┬────────┬─────┬───────────┬──────┬──────────┐
+│ App name          │ id │ mode    │ pid  │ status │ restart │ uptime │ cpu │ mem       │ user │ watching │
+├───────────────────┼────┼─────────┼──────┼────────┼─────────┼────────┼─────┼───────────┼──────┼──────────┤
+│ koa2framework_api │ 3  │ cluster │ 9975 │ online │ 0       │ 10s    │ 0%  │ 26.6 MB   │ root │ enabled  │
+│ koa2framework_web │ 1  │ cluster │ 9963 │ online │ 1       │ 10s    │ 0%  │ 52.9 MB   │ root │ enabled  │
+│ koa2framework_ws  │ 2  │ cluster │ 9964 │ online │ 1       │ 10s    │ 0%  │ 47.3 MB   │ root │ enabled  │
+└───────────────────┴────┴─────────┴──────┴────────┴─────────┴────────┴─────┴───────────┴──────┴──────────┘
 ```
     
