@@ -10,6 +10,10 @@ module.exports = {
             script: './bootstrap/app.js',
             instance: 'max',
             exec_mode: 'cluster',
+            ignore_watch: ['node_modules', 'static', 'app/views'],
+            watch_options: {
+                usePolling: true
+            },
             env: {
                 NODE_ENV: 'development',
                 COMMON_VARIABLE: 'true',
@@ -27,6 +31,10 @@ module.exports = {
             script: './bootstrap/api.js',
             instance: 'max',
             exec_mode: 'cluster',
+            ignore_watch: ['node_modules', 'static', 'app/views'],
+            watch_options: {
+                usePolling: true
+            },
             env: {
                 NODE_ENV: 'development',
                 COMMON_VARIABLE: 'true',
@@ -44,6 +52,10 @@ module.exports = {
             script: './bootstrap/websocket.js',
             instance: 'max',
             exec_mode: 'cluster',
+            ignore_watch: ['node_modules', 'static', 'app/views'],
+            watch_options: {
+                usePolling: true
+            },
             env: {
                 NODE_ENV: 'development',
                 COMMON_VARIABLE: 'true',
