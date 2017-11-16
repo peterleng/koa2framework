@@ -4,28 +4,55 @@ module.exports = {
      */
     apps: [
 
-        // First application
+        // web application
         {
-            name: 'koa2framework',
+            name: 'koa2framework_web',
             script: './bootstrap/app.js',
             instance: 'max',
-            watch: true,
             exec_mode: 'cluster',
             env: {
                 NODE_ENV: 'development',
-                COMMON_VARIABLE: 'true'
+                COMMON_VARIABLE: 'true',
+                watch: true,
             },
             env_production: {
-                NODE_ENV: 'production'
+                NODE_ENV: 'production',
+                watch: false,
             }
         },
 
-        /*
-        // Second application
+        // api application
         {
-            name: 'WEB',
-            script: 'web.js'
-        }
-        */
+            name: 'koa2framework_api',
+            script: './bootstrap/api.js',
+            instance: 'max',
+            exec_mode: 'cluster',
+            env: {
+                NODE_ENV: 'development',
+                COMMON_VARIABLE: 'true',
+                watch: true,
+            },
+            env_production: {
+                NODE_ENV: 'production',
+                watch: false,
+            }
+        },
+
+        // webSocket application
+        {
+            name: 'koa2framework_ws',
+            script: './bootstrap/websocket.js',
+            instance: 'max',
+            exec_mode: 'cluster',
+            env: {
+                NODE_ENV: 'development',
+                COMMON_VARIABLE: 'true',
+                watch: true,
+            },
+            env_production: {
+                NODE_ENV: 'production',
+                watch: false,
+            }
+        },
     ]
 };

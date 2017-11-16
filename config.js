@@ -1,15 +1,24 @@
 const config = {
 
     env: 'development',//production
-
+    proxy: true,
     timezone: 'Asia/Shanghai',
 
-    port: 3000,
-    ssl_port: 3001,
-    proxy: true,
     domain: 'nodejs.dev',//nodejs.dev
-
     res_host: 'http://res.nodejs.dev/', // http://res.nodejs.dev/
+
+    web: {
+        port: 3000,
+        ssl_port: 3001,
+    },
+    api: {
+        port: 3002,
+        ssl_port: 3003,
+    },
+    websocket: {
+        port: 3004,
+        ssl_port: 3005,
+    },
 
     cookie: {
         secret: 'koa2framework_secret',

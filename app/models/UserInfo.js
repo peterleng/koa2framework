@@ -1,4 +1,4 @@
-const sequelize = require('../../bootstrap/model');
+const sequelize = require('../utils/model');
 const Sequelize = require('sequelize');
 
 let Userinfo = sequelize.define('userinfo', {

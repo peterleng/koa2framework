@@ -99,7 +99,8 @@
 
     $(document).ready(function () {
 
-        var ws = new WebSocket('ws://localhost:3000/wsauth/' + uid);
+//        var ws = new WebSocket('ws://localhost:3000/wsauth/' + uid);
+        var ws = new WebSocket('ws://ws.nodejs.dev/wsauth/' + uid);
 
         ws.onmessage = function (event) {
             var data = event.data;

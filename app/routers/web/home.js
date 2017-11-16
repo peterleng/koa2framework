@@ -1,9 +1,9 @@
 const router = require('koa-router')();
 
-const indexController = require('./../controllers/home/IndexController');
-const userinfoController = require('./../controllers/home/UserInfoController');
-const newsController = require('./../controllers/home/NewsController');
-const roomController = require('../controllers/home/ChatRoomController');
+const indexController = require('../../controllers/home/IndexController');
+const userinfoController = require('../../controllers/home/UserInfoController');
+const newsController = require('../../controllers/home/NewsController');
+const roomController = require('../../controllers/home/ChatRoomController');
 
 const routers = router
     .get('home.index', '/', indexController.index)
