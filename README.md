@@ -47,7 +47,7 @@ npm install
 4. 最后启动项目
 ```
 pm2 start ecosystem.config.js
-'OR'
+或
 pm2 start ecosystem.config.js --env production
 ```
 启动成功，便可以看到类似下面的信息
