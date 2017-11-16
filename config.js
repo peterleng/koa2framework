@@ -7,9 +7,9 @@ const config = {
     port: 3000,
     ssl_port: 3001,
     proxy: true,
-    domain: 'localhost',//nodejs.dev
+    domain: 'nodejs.dev',//nodejs.dev
 
-    res_host: '/', // `http://res.${this.domain}/`
+    res_host: 'http://res.nodejs.dev/', // http://res.nodejs.dev/
 
     cookie: {
         secret: 'koa2framework_secret',
@@ -17,7 +17,7 @@ const config = {
     },
 
     session: {
-        domain: 'localhost', // .nodejs.dev
+        domain: '.nodejs.dev', // .nodejs.dev
         lifetime: 2 * 60 * 60 * 1000,
         cookie: '_koa2session',
         path: '/',
