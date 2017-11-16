@@ -53,15 +53,11 @@ app.use(session({
 const authMiddleware = require('./../app/middlewares/auth');
 app.use(authMiddleware());
 
-//默认关闭socket
 //初始化WebSocket路由中间件
 const wsRouters = require('../app/routers/ws.router');
 app.ws.use(wsRouters.routes()).use(wsRouters.allowedMethods());
 
 let server = http.createServer(app.callback());
-// server.listen(config.websocket.port);
-// server.listen(config.websocket.ssl_port);
-
 //监听socket
 app.ws.listen({
     server: server,
@@ -69,4 +65,4 @@ app.ws.listen({
 });
 
 console.log(`the webSocket server is start at port ${config.websocket.port}`);
-// console.log(`the webSocket server is start at ssl_port ${config.ssl_port}`);
+// console.log(`the webSocket server is start at ssl_port ${config.websocket.ssl_port}`);
