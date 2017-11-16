@@ -46,7 +46,10 @@ module.exports.upfile = async (ctx, next) => {
 
         let result = await uploaded(ctx, next);
 
-        ctx.response.body = ctx.jsonSuccess({url: ctx.state.config.res_host +'/'+ name, value: dirpath +'/'+ name}, 'success');
+        ctx.response.body = ctx.jsonSuccess({
+            url: ctx.state.config.res_host + dirpath + '/' + name,
+            value: dirpath + '/' + name
+        }, 'success');
     } catch (err) {
         ctx.response.body = ctx.jsonError(err.message, err.code);
     }
